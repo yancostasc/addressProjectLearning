@@ -1,18 +1,14 @@
 package com.projetinho;
 
-import org.springframework.boot.Banner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
+@EnableFeignClients
 @SpringBootApplication
-public class App
-{
+public class App {
     public static void main(String[] args) {
-
-        new SpringApplicationBuilder(App.class)
-                .properties("server.servlet.context-path=/projetinho")
-                //.logStartupInfo(false)
-                .build()
-                .run(args);
+        SpringApplication.run(App.class, args);
     }
+
 }

@@ -1,29 +1,25 @@
 package com.projetinho.controller;
 
 import com.projetinho.controller.dto.AddressDTO;
-import lombok.AllArgsConstructor;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import com.projetinho.service.AddressService;
-import org.springframework.web.bind.annotation.ResponseBody;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @AllArgsConstructor
 public class AddressController {
 
+    @Autowired
     private final AddressService addressService;
 
-    @GetMapping(value = "/", produces = MediaType.TEXT_PLAIN_VALUE)
-    public @ResponseBody String teste(){
-        return "teste";
+    @GetMapping("cep/{cep}/json")
+    public ResponseEntity<AddressDTO> getCep(@PathVariable("cep") String cep) {
+        AddressDTO addressDTO = addressService.getCep(cep);
+        return ResponseEntity.ok().body(addressDTO);
     }
 
-    /*
-    @PostMapping("/projetinho/teste")
-    public AddressDTO create(AddressDTO addressDTO) {
-        return addressService.create(addressDTO);
-    }
-     */
 }
